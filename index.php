@@ -106,6 +106,8 @@ if (isset($_SESSION['token'])) {
 	if (isset($_SESSION['authtype'])) {
 		$authtype = $_SESSION['authtype'];
 	}
+
+	if (isset($user) && strtolower($authtype) != 'mfa' && $check === false && strtolower($administrator) == 'yes') {
 	?>
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container-fluid">
@@ -146,10 +148,6 @@ if (isset($_SESSION['token'])) {
 			</ul>
 		</div>
 	</nav>
-	<?php
-	if (isset($user) && strtolower($authtype) != 'mfa' && $check === false && strtolower($administrator) == 'yes') {
-	?>
-	
 	<div class="container-fluid">
 		<div id="sidebar">
 			<div class="logo-container"><i class="logo fa fa-cogs"></i></div>
@@ -450,6 +448,7 @@ if (isset($_SESSION['token'])) {
 	<?php
 	} else {
 		header('Location: /exchange');
+		
 	}
 } else {
 	unset($_SESSION);
